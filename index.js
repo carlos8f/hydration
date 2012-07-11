@@ -63,6 +63,16 @@ function hydrate(input) {
       return;
     }
     switch (obj._types[k]) {
+      case 'boolean':
+        if (typeof obj[k] === 'string') {
+          if (obj[k] === 'false' || obj[k] === '0') {
+            obj[k] = false;
+          }
+          else {
+            obj[k] = true;
+          }
+        }
+        break;
       case 'date':
         if (typeof obj[k] == 'string') {
           obj[k] = new Date(obj[k]);

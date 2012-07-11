@@ -28,9 +28,26 @@ describe('hydration', function() {
       object: {property: 'test', other: {something: true}},
       number: 1.01234,
       hex: 0xffffff,
-      string: 'hello'
+      string: 'hello',
+      bool: true
     };
     var dehydrated = JSON.stringify(hydration.dehydrate(obj));
+    var hydrated = hydration.hydrate(JSON.parse(dehydrated));
+    assert.deepEqual(obj, hydrated, 'hydrated object equals original');
+  });
+  it('can hydrate types after JSON conversion with string booleans', function() {
+    var obj = {
+      'zero': false,
+      'false': false,
+      'true': true,
+      'truthy': true
+    };
+    var dehydrated = hydration.dehydrate(obj);
+    dehydrated['zero'] = '0';
+    dehydrated['false'] = 'false';
+    dehydrated['true'] = 'true'
+    dehydrated['truthy'] = 'bazinga!';
+    dehydrated = JSON.stringify(dehydrated);
     var hydrated = hydration.hydrate(JSON.parse(dehydrated));
     assert.deepEqual(obj, hydrated, 'hydrated object equals original');
   });
