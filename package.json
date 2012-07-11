@@ -2,7 +2,7 @@
   "author": "Carlos Rodriguez <carlos@s8f.org> (http://s8f.org/)",
   "name": "hydration",
   "description": "Type-accurate serialization of javascript objects",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "test": "make test"
   },
