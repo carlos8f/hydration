@@ -12,7 +12,10 @@ function dehydrate(input) {
       return;
     }
     var type = getType(obj[k]);
-    obj._types[k] = type;
+    // Strings are implied
+    if (type !== 'string') {
+      obj._types[k] = type;
+    }
     switch (type) {
       case 'array':
         // Convert to an object so we can store types.
