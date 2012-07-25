@@ -34,6 +34,9 @@ function dehydrate(input) {
         break;
     }
   });
+  if (Object.keys(obj._types).length === 0) {
+    delete obj._types;
+  }
   return obj;
 };
 exports.dehydrate = dehydrate;
@@ -59,7 +62,7 @@ function hydrate(input) {
     obj[k] = input[k];
   });
   if (!obj._types) {
-    return;
+    return obj;
   }
   Object.keys(obj).forEach(function(k) {
     if (k == '_types') {
