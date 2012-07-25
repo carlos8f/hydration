@@ -14,7 +14,9 @@ describe('hydration', function() {
           date: new Date()
         }
       },
-      patterns: [/blah/, /etc/]
+      patterns: [/blah/, /etc/],
+      emptyArray: [],
+      emptyBoj: {}
     };
     var dehydrated = hydration.dehydrate(obj);
     var hydrated = hydration.hydrate(dehydrated);
