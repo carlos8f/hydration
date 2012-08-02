@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>hydration test</title>
+    <script src="../index.js"></script>
+  </head>
+  <body>
+    <script>
+    var obj = {
+      history: {
+        'may 14th 2012': {
+          birthdays: ['erin', 'mark', new Date(), /something/],
+          hours: 24
+        },
+        today: {
+          date: new Date()
+        }
+      },
+      patterns: [/blah/, /etc/],
+      emptyArray: [],
+      emptyBoj: {}
+    };
+    var dehydrated = hydration.dehydrate(obj);
+    var hydrated = hydration.hydrate(dehydrated);
+    console.log(hydrated, 'can rehydrate complex object');
+    </script>
+
+    <script>
+    var obj = {
+      regex: /my regex/,
+      date: new Date(),
+      array: ['blah', 'etc'],
+      object: {property: 'test', other: {something: true}},
+      number: 1.01234,
+      hex: 0xffffff,
+      string: 'hello',
+      bool: true
+    };
+    var dehydrated = JSON.stringify(hydration.dehydrate(obj));
+    var hydrated = hydration.hydrate(JSON.parse(dehydrated));
+    console.log(hydrated, 'can hydrate types after JSON conversion');
+    </script>
+
+    <script>
+    var obj = {
+      'zero': false,
+      'false': false,
+      'true': true,
+      'truthy': true
+    };
+    var dehydrated = hydration.dehydrate(obj);
+    dehydrated['zero'] = '0';
+    dehydrated['false'] = 'false';
+    dehydrated['true'] = 'true'
+    dehydrated['truthy'] = 'bazinga!';
+    dehydrated = JSON.stringify(dehydrated);
+    var hydrated = hydration.hydrate(JSON.parse(dehydrated));
+    console.log(hydrated, 'can hydrate types after JSON conversion with string booleans');
+    </script>
+    <p>Check the console for test results.</p>
+  </body>
+</html>
