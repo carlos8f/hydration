@@ -3,6 +3,7 @@
   "name": "hydration",
   "description": "Type-accurate serialization of javascript objects",
   "version": "0.2.2",
+  "main": "./hydration.js",
   "scripts": {
     "test": "make test"
   },
@@ -10,6 +11,7 @@
   "devDependencies": {
     "mocha": "*"
   },
+  "license": "MIT",
   "optionalDependencies": {},
   "engines": {
     "node": "*"
