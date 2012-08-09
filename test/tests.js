@@ -12,7 +12,8 @@ describe('hydration', function() {
         },
         today: {
           date: new Date()
-        }
+        },
+        tricky: null
       },
       patterns: [/blah/, /etc/],
       emptyArray: [],
@@ -31,7 +32,8 @@ describe('hydration', function() {
       number: 1.01234,
       hex: 0xffffff,
       string: 'hello',
-      bool: true
+      bool: true,
+      tricky: null
     };
     var dehydrated = JSON.stringify(hydration.dehydrate(obj));
     var hydrated = hydration.hydrate(JSON.parse(dehydrated));
