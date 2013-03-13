@@ -6,6 +6,7 @@
       if (!input.hasOwnProperty(k)) continue;
       obj[k] = input[k];
     }
+    obj.__proto__ = input.__proto__; // so prototype.toJSON() will still fire
     obj._types = {};
 
     for (k in obj) {
