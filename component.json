@@ -1,0 +1,14 @@
+{
+  "name": "hydration",
+  "repo": "carlos8f/hydration",
+  "description": "Type-accurate serialization of javascript objects",
+  "version": "0.4.0",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
