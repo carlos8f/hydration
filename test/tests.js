@@ -13,6 +13,7 @@ describe('hydration', function() {
         today: {
           date: new Date()
         },
+        buffer: new Buffer('hey ho'),
         tricky: null
       },
       patterns: [/blah/, /etc/],
@@ -21,7 +22,7 @@ describe('hydration', function() {
     };
     var dehydrated = hydration.dehydrate(obj);
     var hydrated = hydration.hydrate(dehydrated);
-    assert.deepEqual(obj, hydrated, 'hydrated object equals original');
+    assert.deepStrictEqual(obj, hydrated, 'hydrated object equals original');
   });
   it('can hydrate types after JSON conversion', function() {
     var obj = {
@@ -30,6 +31,7 @@ describe('hydration', function() {
       array: ['blah', 'etc'],
       object: {property: 'test', other: {something: true}},
       number: 1.01234,
+      buffer: new Buffer('hey hey'),
       hex: 0xffffff,
       string: 'hello',
       bool: true,
@@ -37,7 +39,7 @@ describe('hydration', function() {
     };
     var dehydrated = JSON.stringify(hydration.dehydrate(obj));
     var hydrated = hydration.hydrate(JSON.parse(dehydrated));
-    assert.deepEqual(obj, hydrated, 'hydrated object equals original');
+    assert.deepStrictEqual(obj, hydrated, 'hydrated object equals original');
   });
   it('can hydrate types after JSON conversion with string booleans', function() {
     var obj = {
