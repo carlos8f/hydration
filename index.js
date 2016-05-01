@@ -62,7 +62,7 @@ function getType(obj) {
     else if (str === '[object Null]') {
       return 'null';
     }
-    else if (Buffer.isBuffer(obj)) {
+    else if (typeof Buffer !== 'undefined' && Buffer.isBuffer(obj)) {
       return 'buffer';
     }
 
