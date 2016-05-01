@@ -57,4 +57,11 @@ describe('hydration', function() {
     var hydrated = hydration.hydrate(JSON.parse(dehydrated));
     assert.deepEqual(obj, hydrated, 'hydrated object equals original');
   });
+
+  it('passes through primitive types and nulls', function () {
+    ['hey', 1, true, null].forEach(function (val) {
+      assert.equal(hydration.hydrate(val), val);
+      assert.equal(hydration.dehydrate(val), val);
+    })
+  });
 });

@@ -1,4 +1,6 @@
 function dehydrate(input) {
+  if (isPrimitiveOrNull(input)) return input;
+
   var obj = {}, k, typeCount = 0;
   for (k in input) {
     if (!input.hasOwnProperty(k)) continue;
@@ -72,6 +74,8 @@ function getType(obj) {
 }
 
 function hydrate(input) {
+  if (isPrimitiveOrNull(input)) return input;
+
   var obj = {}, k;
   for (k in input) {
     if (!input.hasOwnProperty(k)) continue;
@@ -130,4 +134,9 @@ function hydrate(input) {
   delete obj._types;
   return obj;
 }
+
+function isPrimitiveOrNull (input) {
+  return input == null || typeof input !== 'object'
+}
+
 exports.hydrate = hydrate;
