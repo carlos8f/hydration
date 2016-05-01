@@ -7,6 +7,10 @@ Type-accurate serialization of javascript objects
 
 @todo usage + examples
 
+## Thanks
+
+Thanks to [@mvayngrib](https://github.com/mvayngrib) for Buffer support.
+
 License
 =======
 
