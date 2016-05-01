@@ -34,9 +34,12 @@ function dehydrate(input) {
       case 'object':
         obj[k] = dehydrate(obj[k]);
         break;
+      case 'buffer':
+        obj[k] = obj[k].toString('base64');
+        break;
     }
   }
-  
+
   if (typeCount === 0) {
     delete obj._types;
   }
@@ -59,6 +62,10 @@ function getType(obj) {
     else if (str === '[object Null]') {
       return 'null';
     }
+    else if (Buffer.isBuffer(obj)) {
+      return 'buffer';
+    }
+
     return 'object';
   }
   return typeof obj;
@@ -111,6 +118,9 @@ function hydrate(input) {
         break;
       case 'object':
         obj[k] = hydrate(obj[k]);
+        break;
+      case 'buffer':
+        obj[k] = new Buffer(obj[k], 'base64')
         break;
       case 'null':
         obj[k] = null;
