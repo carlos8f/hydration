@@ -3,7 +3,7 @@ var hydration = require('../')
   ;
 
 describe('hydration', function() {
-  it('can rehydrate complex object', function() {
+  it('can rehydrate a complex object', function() {
     var obj = {
       history: {
         'may 14th 2012': {
@@ -57,4 +57,53 @@ describe('hydration', function() {
     var hydrated = hydration.hydrate(JSON.parse(dehydrated));
     assert.deepEqual(obj, hydrated, 'hydrated object equals original');
   });
+
+  it('passes through primitive types and nulls', function () {
+    ['hey', 1, true, null].forEach(function (val) {
+      assert.equal(hydration.hydrate(val), val);
+      assert.equal(hydration.dehydrate(val), val);
+    })
+  });
+
+  it('supports custom types', function () {
+    function OogaBooga (name) {
+      this.name = name
+    }
+
+    var custom = hydration()
+    custom.addType('heyho', {
+      test: function (val) {
+        return typeof val === 'object' && val.hey === 'ho'
+      },
+      dehydrate: function (val) {
+        return 100
+      },
+      hydrate: function (val) {
+        return { hey: 'ho' }
+      }
+    })
+
+    custom.addType('oogabooga', {
+      test: function (val) {
+        return val instanceof OogaBooga
+      },
+      dehydrate: function (val) {
+        return val.name
+      },
+      hydrate: function (val) {
+        return new OogaBooga(val)
+      }
+    })
+
+    var obj = {
+      a: { hey: 'ho' },
+      b: new OogaBooga('yum')
+    }
+
+    var dehydrated = custom.dehydrate(obj)
+    assert.equal(dehydrated.a, 100)
+
+    var hydrated = custom.hydrate(dehydrated)
+    assert.deepEqual(obj, hydrated, 'hydrated object equals original')
+  })
 });
