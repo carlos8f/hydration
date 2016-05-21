@@ -65,7 +65,7 @@ var hydrated = hydra.hydrate(dehydrated)
 
 ## Thanks
 
-Thanks to [@mvayngrib](https://github.com/mvayngrib) for Buffer support.
+Thanks to [@mvayngrib](https://github.com/mvayngrib) for Buffer and custom type support, and documentation.
 
 License
 =======
