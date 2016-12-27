@@ -58,9 +58,9 @@ var obj = {
   //...
 }
 
-var dehydrated = hydra.dehydrate(obj)
+var dehydrated = custom.dehydrate(obj)
 // JSON.stringify + JSON.parse if you like
-var hydrated = hydra.hydrate(dehydrated)
+var hydrated = custom.hydrate(dehydrated)
 ```
 
 ## Thanks
